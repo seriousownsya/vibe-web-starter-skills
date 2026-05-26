@@ -1,10 +1,10 @@
-# Vibe Web Scaffold Skills
+# Vibe Web Starter Skills
 
 Opinionated Codex skills for quickly creating simple websites, REST APIs, and full-stack TypeScript apps with security-conscious defaults.
 
 These scaffolds are for nontechnical builders, solo operators, small companies, and vibe coders who want to get a real project online without making dozens of setup decisions.
 
-Repository slug: `vibe-web-scaffold-skills`
+Repository slug: `vibe-web-starter-skills`
 
 ## What This Is
 
@@ -46,7 +46,7 @@ Install from a release zip, or clone this repository and copy the skill folders.
 Windows PowerShell from a release zip:
 
 ```powershell
-Expand-Archive .\scaffold-preferred-stack-skills.zip -DestinationPath "$env:USERPROFILE\.codex\skills" -Force
+Expand-Archive .\vibe-web-starter-skills-vX.Y.Z.zip -DestinationPath "$env:USERPROFILE\.codex\skills" -Force
 ```
 
 Windows PowerShell from a clone:
@@ -58,7 +58,7 @@ Copy-Item .\skills\* "$env:USERPROFILE\.codex\skills" -Recurse -Force
 macOS or Linux from a release zip:
 
 ```bash
-unzip scaffold-preferred-stack-skills.zip -d ~/.codex/skills
+unzip vibe-web-starter-skills-vX.Y.Z.zip -d ~/.codex/skills
 ```
 
 macOS or Linux from a clone:

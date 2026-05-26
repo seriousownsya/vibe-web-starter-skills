@@ -36,6 +36,5 @@ The bundled CI template pins these action refs:
 - `actions/checkout` v6 -> `de0fac2e4500dabe0009e67214ff5f5447ce83dd`
 - `actions/setup-node` v6 -> `48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e`
 - `actions/upload-artifact` v5 -> `330a01c490aca151604b8cf639adc76d48f6c5d4`
-- `actions/dependency-review-action` v5.0.0 -> `a1d282b36b6f3519aa1f3fc636f609c47dddb294`
 
 Refresh pins before distributing a new package.
