@@ -94,19 +94,20 @@ audit=true
 3. Verify provider auth. Stop only for missing safe CLI login.
 4. Scaffold Nuxt by default with exact `nuxi`; use exact `create-next-app` only for explicit Next requests.
 5. Add exact versions for API dependencies and test dependencies, including `zod`, Vitest, Playwright, and framework test utilities.
-6. Copy API templates from `assets/templates/` and adapt paths if using Next. This includes `AGENTS.md`, `CLAUDE.md`, `.env.example`, `.nvmrc`, `.npmrc`, `scripts/check-no-secrets.mjs`, CI, Netlify, Railway, API, schema, and test templates. Append `gitignore-security.txt` to the generated `.gitignore`.
+6. Copy API templates from `assets/templates/` and adapt paths if using Next. This includes `AGENTS.md`, `CLAUDE.md`, `.env.example`, `.nvmrc`, `.npmrc`, `scripts/check-no-secrets.mjs`, `nuxt.config.ts`, CI, Netlify, Railway, API, schema, server security middleware, and test templates. Append `gitignore-security.txt` to the generated `.gitignore`.
 7. Add scripts: `secret:scan`, `lint`, `typecheck`, `test:unit`, `test:api`, `build`, `dev`, `start`, and `preview`. `secret:scan` must run `node scripts/check-no-secrets.mjs`.
-8. Run `npm run secret:scan`, `npm run typecheck`, `npm run test:unit`, `npm run build`, and `npm run test:api`.
-9. Create a private GitHub repo with `gh repo create --private --source . --remote origin`, commit, and push.
-10. Check GitHub Actions after pushing. If CI fails and credentials allow access, inspect logs with `gh run view --log`, fix the issue, rerun local checks, commit, and push again. Do not rely on a nontechnical user to debug red CI.
-11. Deploy to Netlify by default:
+8. Keep both Netlify static headers and the Nuxt server middleware headers. Netlify TOML headers alone do not cover every Nuxt serverless/API response.
+9. Run `npm run secret:scan`, `npm run typecheck`, `npm run test:unit`, `npm run build`, and `npm run test:api`.
+10. Create a private GitHub repo with `gh repo create --private --source . --remote origin`, commit, and push.
+11. Check GitHub Actions after pushing. If CI fails and credentials allow access, inspect logs with `gh run view --log`, fix the issue, rerun local checks, commit, and push again. Do not rely on a nontechnical user to debug red CI.
+12. Deploy to Netlify by default:
 
 ```powershell
 netlify sites:create --name <project-slug> --json
 netlify deploy --prod --build
 ```
 
-12. If Railway is required, add `railway.json`, verify Railway auth, create/link the Railway project, configure variables through Railway, and deploy with `railway up`.
+13. If Railway is required, add `railway.json`, verify Railway auth, create/link the Railway project, configure variables through Railway, and deploy with `railway up`.
 
 ## Project Shape
 
@@ -114,6 +115,8 @@ For Nuxt:
 
 ```text
 server/
+  middleware/
+    security-headers.ts
   api/
     health.get.ts
     message.post.ts
@@ -132,6 +135,7 @@ CLAUDE.md
 .env.example
 .nvmrc
 .npmrc
+nuxt.config.ts
 netlify.toml
 railway.json       # only when Railway is needed
 ```

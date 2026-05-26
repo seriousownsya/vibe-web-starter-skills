@@ -110,22 +110,24 @@ audit=true
 2. Verify `node`, `npm`, `git`, `gh`, and `netlify`. Verify `railway` only when Railway is needed. Use Node 24 LTS unless the project has a documented incompatibility. If a provider CLI is missing, stop with the official install/login command; do not install global tools without user approval.
 3. Verify provider auth. Stop only for missing safe CLI login.
 4. Scaffold Nuxt by default with exact `nuxi`; use exact `create-next-app` only for explicit Next requests.
-5. Add exact versions for Tailwind CSS v4, `@tailwindcss/vite`, zod, Vitest, Playwright, and framework test utilities. Add Prisma only when a database is required.
+5. Add exact versions for Tailwind CSS v4, `@tailwindcss/vite`, zod, Vitest, Playwright, framework test utilities, and `hookable` as a direct runtime dependency for Nuxt SSR on Netlify. Add Prisma only when a database is required.
 6. Create pages and endpoints using the project shape below.
-7. Copy templates from `assets/templates/` and adapt paths if using Next. This includes `AGENTS.md`, `CLAUDE.md`, `.env.example`, `.nvmrc`, `.npmrc`, `scripts/check-no-secrets.mjs`, CI, Netlify, Railway, page, API, schema, and test templates. Append `gitignore-security.txt` to the generated `.gitignore`.
+7. Copy templates from `assets/templates/` and adapt paths if using Next. This includes `AGENTS.md`, `CLAUDE.md`, `.env.example`, `.nvmrc`, `.npmrc`, `scripts/check-no-secrets.mjs`, `nuxt.config.ts`, CI, Netlify, Railway, page, API, schema, server security middleware, and test templates. Append `gitignore-security.txt` to the generated `.gitignore`.
 8. Create minimal local UI building blocks only when useful: `AppButton`, `AppCard`, and `TextField`. Use system fonts, CSS variables, and a clean neutral theme.
 9. Add scripts: `secret:scan`, `lint`, `typecheck`, `test:unit`, `test:api`, `test:e2e`, `build`, `dev`, `start`, and `preview`. `secret:scan` must run `node scripts/check-no-secrets.mjs`.
-10. Run the lightweight local checks: `npm run secret:scan`, `npm run typecheck`, `npm run test:unit`, `npm run build`, and `npm run test:api`. Run `npm run test:e2e` locally only when Playwright browsers are already installed or the user approves the install.
-11. Create a private GitHub repo with `gh repo create --private --source . --remote origin`, commit, and push.
-12. Check GitHub Actions after pushing. If CI fails and credentials allow access, inspect logs with `gh run view --log`, fix the issue, rerun local checks, commit, and push again. Do not rely on a nontechnical user to debug red CI.
-13. Deploy to Netlify when the app has no database, worker, queue, cron, or long-running service:
+10. Keep the bundled `nitro.externals.inline` config for `@unhead/vue`, `unhead`, and `hookable`; this prevents Netlify SSR function packaging from missing the head/runtime dependency graph.
+11. Keep both Netlify static headers and the Nuxt server middleware headers. Netlify TOML headers alone do not cover every Nuxt serverless/API response.
+12. Run the lightweight local checks: `npm run secret:scan`, `npm run typecheck`, `npm run test:unit`, `npm run build`, and `npm run test:api`. Run `npm run test:e2e` locally only when Playwright browsers are already installed or the user approves the install.
+13. Create a private GitHub repo with `gh repo create --private --source . --remote origin`, commit, and push.
+14. Check GitHub Actions after pushing. If CI fails and credentials allow access, inspect logs with `gh run view --log`, fix the issue, rerun local checks, commit, and push again. Do not rely on a nontechnical user to debug red CI.
+15. Deploy to Netlify when the app has no database, worker, queue, cron, or long-running service:
 
 ```powershell
 netlify sites:create --name <project-slug> --json
 netlify deploy --prod --build
 ```
 
-14. Use Railway when persistence or long-running services are required. Add `railway.json`, configure variables only through Railway, and deploy with `railway up`. Do not pretend a static deploy is production-ready when the app needs a persistent runtime.
+16. Use Railway when persistence or long-running services are required. Add `railway.json`, configure variables only through Railway, and deploy with `railway up`. Do not pretend a static deploy is production-ready when the app needs a persistent runtime.
 
 ## Project Shape
 
@@ -143,6 +145,8 @@ app/
   composables/
   utils/
 server/
+  middleware/
+    security-headers.ts
   api/
     health.get.ts
     message.post.ts
@@ -161,6 +165,7 @@ CLAUDE.md
 .env.example
 .nvmrc
 .npmrc
+nuxt.config.ts
 netlify.toml
 railway.json       # only when Railway is needed
 ```

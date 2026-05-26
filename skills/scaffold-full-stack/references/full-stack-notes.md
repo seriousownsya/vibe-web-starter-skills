@@ -31,12 +31,19 @@ This skill intentionally reuses the defaults from `scaffold-static-site` and `sc
 
 Use Tailwind CSS v4 with the official Vite integration for styling. Keep the starter design local and small: CSS variables, system fonts, and a few components in `app/components`.
 
+## Netlify SSR Notes
+
+For Nuxt SSR on Netlify, keep `hookable` as a direct runtime dependency and inline `@unhead/vue`, `unhead`, and `hookable` in Nitro externals. Live testing found Netlify's function package could otherwise miss the head/runtime dependency graph and return a 500.
+
+Keep `server/middleware/security-headers.ts` in Nuxt full-stack projects. Netlify `[[headers]]` applies to CDN/static paths but did not consistently cover Nuxt serverless API or SSR responses during live testing.
+
 ## GitHub Actions Pins
 
 The bundled CI template pins these action refs:
 
 - `actions/checkout` v6 -> `de0fac2e4500dabe0009e67214ff5f5447ce83dd`
 - `actions/setup-node` v6 -> `48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e`
-- `actions/upload-artifact` v5 -> `330a01c490aca151604b8cf639adc76d48f6c5d4`
+
+The generated CI does not upload Playwright artifacts by default. Keep the first-run workflow minimal and avoid extra JavaScript action/runtime surface unless a project actually needs artifacts.
 
 Refresh pins before distributing a new package.

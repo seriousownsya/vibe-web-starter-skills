@@ -35,6 +35,7 @@ The bundled CI template pins these action refs:
 
 - `actions/checkout` v6 -> `de0fac2e4500dabe0009e67214ff5f5447ce83dd`
 - `actions/setup-node` v6 -> `48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e`
-- `actions/upload-artifact` v5 -> `330a01c490aca151604b8cf639adc76d48f6c5d4`
+
+The generated CI does not upload Playwright artifacts by default. Keep the first-run workflow minimal and avoid extra JavaScript action/runtime surface unless a project actually needs artifacts.
 
 Refresh pins before distributing a new package.

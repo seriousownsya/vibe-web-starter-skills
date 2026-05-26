@@ -1,0 +1,10 @@
+const securityHeaders = {
+  'X-Content-Type-Options': 'nosniff',
+  'X-Frame-Options': 'DENY',
+  'Referrer-Policy': 'strict-origin-when-cross-origin',
+  'Permissions-Policy': 'camera=(), microphone=(), geolocation=()',
+}
+
+export default defineEventHandler((event) => {
+  setResponseHeaders(event, securityHeaders)
+})

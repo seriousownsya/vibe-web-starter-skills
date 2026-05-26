@@ -44,11 +44,3 @@ jobs:
 
       - name: API tests
         run: npm run test:api
-
-      - name: Upload Playwright report
-        if: ${{ !cancelled() }}
-        uses: actions/upload-artifact@330a01c490aca151604b8cf639adc76d48f6c5d4 # v5
-        with:
-          name: playwright-report
-          path: playwright-report/
-          retention-days: 7
