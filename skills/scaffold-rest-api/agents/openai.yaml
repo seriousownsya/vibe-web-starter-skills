@@ -1,0 +1,4 @@
+interface:
+  display_name: "Scaffold REST API"
+  short_description: "Secure typed REST API scaffold."
+  default_prompt: "Scaffold a secure typed REST API with CI and deployment defaults."

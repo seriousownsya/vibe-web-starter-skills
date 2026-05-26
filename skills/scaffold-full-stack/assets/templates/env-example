@@ -1,0 +1,4 @@
+# Copy to .env.local only when local-only values are needed.
+# Never commit .env.local or real secrets.
+# Put production values in Netlify or Railway environment variables.
+NUXT_PUBLIC_SITE_NAME="Example App"

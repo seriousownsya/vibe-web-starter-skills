@@ -1,0 +1,30 @@
+# Local build and release artifacts
+dist/
+*.zip
+*.zip.sha256
+
+# Local secrets and machine state
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+id_rsa
+id_dsa
+id_ecdsa
+id_ed25519
+
+# Tool caches
+.cache/
+.venv/
+node_modules/
+coverage/
+playwright-report/
+test-results/
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
+*.log

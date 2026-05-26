@@ -1,0 +1,4 @@
+interface:
+  display_name: "Scaffold Static Site"
+  short_description: "Secure static Nuxt/Next scaffold."
+  default_prompt: "Scaffold a static site with secure TypeScript defaults and deploy it to Netlify."

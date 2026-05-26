@@ -1,0 +1,12 @@
+import { defineConfig } from 'vitest/config'
+
+export default defineConfig({
+  test: {
+    environment: 'happy-dom',
+    include: ['tests/unit/**/*.spec.ts'],
+    globals: true,
+    coverage: {
+      reporter: ['text', 'html'],
+    },
+  },
+})

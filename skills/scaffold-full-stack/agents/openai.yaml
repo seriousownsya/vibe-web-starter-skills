@@ -1,0 +1,4 @@
+interface:
+  display_name: "Scaffold Full Stack"
+  short_description: "Secure full-stack Nuxt/Next scaffold."
+  default_prompt: "Scaffold a secure full-stack app with pages, APIs, CI, GitHub, Netlify, and Railway when needed."

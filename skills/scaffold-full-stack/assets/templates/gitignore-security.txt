@@ -1,0 +1,30 @@
+# Local secrets and machine-specific agent files
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+*.crt
+*.cer
+*.der
+id_rsa
+id_dsa
+id_ecdsa
+id_ed25519
+CLAUDE.local.md
+.claude/settings.local.json
+
+# Provider and generated output
+.netlify/
+.railway/
+.nuxt/
+.next/
+.output/
+.vercel/
+dist/
+coverage/
+playwright-report/
+test-results/
+*.log
